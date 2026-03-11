@@ -1,8 +1,14 @@
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import os
 import ccxt
 import pandas as pd
 import time
 from datetime import datetime
 from config import TIMEFRAME, EXCHANGE, LIVE_LOOKBACK, LOOKBACK, ALERT_THRESHOLD, POLL_INTERVAL
+
+os.makedirs("data", exist_ok=True)
 
 class DataIngestion:
 
@@ -37,7 +43,7 @@ class DataIngestion:
             df['timestamps'] = pd.to_datetime(df['timestamps'], unit='ms')
 
             df = df.set_index('timestamps')
-
+            df.to_csv(f'data/dataofbtc.csv', index=False)
             return df
  
         except ccxt.NetworkError as e:
@@ -58,3 +64,6 @@ class DataIngestion:
         return results
 
 
+if __name__ == '__main__':
+    ingestion = DataIngestion()
+    ingestion.fetch_ohlcv(symbol='BTC/USDT')
