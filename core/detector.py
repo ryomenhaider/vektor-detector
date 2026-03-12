@@ -22,7 +22,6 @@ class ManipulationDetector:
   def fit(self, X: np.ndarray):
       X_s = self.scaler.fit_transform(X)
       self.model.fit(X_s)
-      # store training score stats for normalization
       train_scores = self.model.decision_function(X_s)
       self.score_min = train_scores.min()
       self.score_max = train_scores.max()
@@ -34,7 +33,6 @@ class ManipulationDetector:
       X_s = self.scaler.transform(X)
       raw = self.model.decision_function(X_s)
       
-      # normalize against TRAINING distribution, not current batch
       if self.score_max == self.score_min:
           return np.zeros(len(raw))
       
