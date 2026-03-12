@@ -47,6 +47,8 @@ class FeatureEngine:
 
     df =  f[cols].replace([np.inf, -np.inf], np.nan).dropna()
     df.to_csv('data/features/enrichdata.csv', index=False)
+
+    return df
   
 featureengineering = FeatureEngine()
 

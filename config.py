@@ -20,7 +20,7 @@ LOOKBACK = 500   # candles for training
 LIVE_LOOKBACK = 60   # candles for live scoring
 
 # Detection settings
-ALERT_THRESHOLD = 0.65   # tune this in backtesting
+ALERT_THRESHOLD = 0.93
 POLL_INTERVAL = 300   # seconds between runs
 MAX_ALERTS_PER_RUN = 3   # max alerts per detection cycle
 BTC_MOVE_FILTER = 0.02   # suppress if BTC moves > 2%
